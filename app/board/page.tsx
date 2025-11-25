@@ -1,25 +1,31 @@
+"use client"
+
 import { BackButton } from "@/components/back-button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { FileText } from "lucide-react"
 import Link from "next/link"
 import { protocols } from "./data"
+import { useLanguage } from "@/components/language-provider"
 
 export default function BoardPage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.board || {}
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         <BackButton />
 
         <div className="mt-4">
-          <a href="/board/protocols" className="inline-block bg-cyan-600 text-white px-4 py-2 rounded">Хаттамалар</a>
+          <a href="/board/protocols" className="inline-block bg-cyan-600 text-white px-4 py-2 rounded">{t.protocols}</a>
         </div>
 
         <div className="mt-6">
           <Card>
             <CardHeader className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white">
-              <CardTitle className="text-2xl md:text-3xl">Байқаушы кеңес</CardTitle>
-              <CardDescription className="text-white/90">Байқаушы кеңестің отырыстарының хаттамалары</CardDescription>
+              <CardTitle className="text-2xl md:text-3xl">{t.title}</CardTitle>
+              <CardDescription className="text-white/90">{t.description}</CardDescription>
             </CardHeader>
             <CardContent className="p-6">
               <Accordion type="single" collapsible className="w-full space-y-4">
@@ -37,7 +43,7 @@ export default function BoardPage() {
                     <AccordionContent className="px-4 pb-4">
                       <div className="space-y-4 pt-4">
                         <div>
-                          <h4 className="font-semibold text-sm text-gray-700 mb-2">Қатысқандар:</h4>
+                          <h4 className="font-semibold text-sm text-gray-700 mb-2">{t.attendees}</h4>
                           <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
                             {protocol.attendees?.map((attendee, idx) => (
                               <li key={idx}>{attendee}</li>
@@ -45,13 +51,13 @@ export default function BoardPage() {
                           </ul>
                           {protocol.absent && (
                             <p className="text-sm text-gray-600 mt-2">
-                              <span className="font-semibold">Қатыспағандар:</span> {protocol.absent.join(", ")}
+                              <span className="font-semibold">{t.absent}</span> {protocol.absent.join(", ")}
                             </p>
                           )}
                         </div>
 
                         <div>
-                          <h4 className="font-semibold text-sm text-gray-700 mb-2">Күн тәртібі:</h4>
+                          <h4 className="font-semibold text-sm text-gray-700 mb-2">{t.agenda}</h4>
                           <div className="space-y-3">
                             {protocol.agenda?.map((item, idx) => (
                               <div key={idx} className="bg-gray-50 p-3 rounded">
@@ -62,7 +68,7 @@ export default function BoardPage() {
                           </div>
                         </div>
                           <div className="mt-3">
-                            <Link href={`/board/${protocol.id}`} className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-600 text-white rounded">Ашу / Жүктеу</Link>
+                            <Link href={`/board/${protocol.id}`} className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-600 text-white rounded">{t.openDownload}</Link>
                           </div>
                         </div>
                     </AccordionContent>
@@ -76,3 +82,4 @@ export default function BoardPage() {
     </div>
   )
 }
+
