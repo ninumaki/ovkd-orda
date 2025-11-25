@@ -1,25 +1,31 @@
+"use client"
+
 import { BackButton } from "@/components/back-button"
 import Link from "next/link"
+import { useLanguage } from "@/components/language-provider"
 
 export default function AboutPage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.about || {}
+
   return (
     <main className="min-h-screen">
       <section className="py-20">
         <div className="container mx-auto px-4">
           <BackButton />
           <div className="mb-12">
-            <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">Бас дәрігер</h1>
+            <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">{t.chiefDoctor}</h1>
             <div className="mx-auto max-w-4xl">
               <div className="bg-white rounded-lg shadow-sm border p-6 space-y-4">
                 <div className="flex items-start space-x-6">
                   <div className="flex-1 space-y-4">
-                    <h2 className="text-2xl font-semibold text-gray-900">Әмір Нұрлан Әмірұлы</h2>
-                    <p className="text-gray-600">Қызылорда облыстық тері-венерология диспансерінің бас дәрігері</p>
+                    <h2 className="text-2xl font-semibold text-gray-900">{t.director}</h2>
+                    <p className="text-gray-600">{t.directorTitle}</p>
                     <Link
                       href="/about/chief"
                       className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                     >
-                      Толығырақ
+                      {t.more}
                     </Link>
                   </div>
                 </div>
@@ -32,13 +38,12 @@ export default function AboutPage() {
               href="/about/history"
               className="inline-block text-4xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
             >
-              Мекеме тарихы
+              {t.institutionHistory}
             </Link>
           </div>
           <div className="mx-auto max-w-4xl space-y-6 text-gray-700">
             <p className="text-lg font-semibold">
-              ҚЫЗЫЛОРДА ОБЛЫСЫНЫҢ ДЕНСАУЛЫҚ САҚТАУ БАСҚАРМАСЫНЫҢ "ҚЫЗЫЛОРДА ОБЛЫСТЫҚ ТЕРІ-ВЕНЕРОЛОГИЯ ДИСПАНСЕРІ"
-              ШАРУАШЫЛЫҚ ЖҮРГІЗУ ҚҰҚЫҒЫНДАҒЫ КОММУНАЛДЫҚ МЕМЛЕКЕТТІК КӘСІПОРНЫ
+              {t.institutionName}
             </p>
 
             <div className="space-y-4">
