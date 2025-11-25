@@ -1,150 +1,110 @@
+"use client"
+
 import Link from "next/link"
 import { BackButton } from "@/components/back-button"
-
-// Контент страницы жадынама для легкого обновления
-const memoPageContent = {
-  title: "Науқастарға арналған жадынама",
-  sections: [
-    {
-      type: "section",
-      title: "Жоспарлы стационарлық емдеуге жатқызу тәртібі",
-      subtitle: "(ҚР Денсаулық Сақтау және Әлеуметтік Даму министерлігінің РК 29 қыркүйектегі 2015 жылғы №761 \"Стационарлық көмек көрсету ережесін бекіту туралы\" заңы)",
-      paragraphs: [
-        "Емдеуге жатқызу бюросының негізгі мақсаты - Кепілдендірілген тегін медициналық көмектің көлемі шеңберінде жоспарлы емдеуге жатқызарда азаматтардың медициналық ұйымды еркін таңдау, қолжетімділігі мен ашықтығын арттыру құқықтарын қамтамасыз ету.",
-        "Денсаулық Сақтаудың Бірыңғай Ақпараттық Жүйелер шеңберінде тәуліктік стационарға жоспарлы емдеуге жатқызу қажет болған жағдайда әрбір Қазақстан Республикасының азаматының, тұрғылықты және тіркелген мекен-жайына қарамастан, медициналық ұйымды таңдауға мүмкіндігі бар.",
-      ],
-    },
-    {
-      type: "section",
-      title: "Бұл не?",
-      paragraphs: [
-        "Емдеуге жатқызу Бюросының порталы - бұл сіздің Республикамыздың кез-келген стационарларындағы алдағы үш күнге бос төсектер туралы ақпаратты ала – алатын интернет-ресурс (https://bg.eisz.kz). Егер Сіз дәрігерден емдеуге жатқызуға арналған коды бар жолдаманы алған болсаңыз, онда Сіз аймақтық және республикалық клиникалардың ағымдағы кезегің қарап, өз кезегіңізді қадағалай аласыз.",
-      ],
-    },
-    {
-      type: "section",
-      title: "АУРУХАНАҒА ЖАТҚЫЗУ ТӘРТІБІ",
-      paragraphs: [
-        "Жоспарлы емдеуге жатқызу – бұл науқастың созылмалы аурулары, өмір сүру үшін қауіпсіз кезіңде (анықталған жағдайда), жедел дәрігерлік араласуды талап етпейтін жағдайларында дәрігердің ауруханаға емдеуге бағытталуы. Жоспарлы емдеуге жатқызу Емдеуге жатқызу Бюросы порталы арқылы науқастың медициналық ұйымды таңдауына сай бірнеше күн ішінде жүзеге асырылады.",
-        "Емдеуге жатқызу Бюросы порталы - Кепілдендірілген тегін медициналық көмектің көлемі шеңберінде науқасты жоспарлы ауруханаға жатқызу жолдамаларын тіркеу, есепке алу, өңдеу және бірыңғай электронды сақтау жүйесі.",
-      ],
-      subsection: {
-        title: "Жоспарлы емдеуге жатқызу үшін:",
-        list: [
-          "Тері - венерологиялық диспансерінің емхана дәрігеріне тіркелу орны бойынша жолдама алу керек.",
-          "Емхананың емдеуші дәрігері науқасты қарап, ауруын толық көлемде диагностикалау үшін қажетті зерттеулерді тағайындайды.",
-          "Емхана жағдайында минималды көлемде (қажетті) зерттеулерден өту керек.",
-          "Емдеуші дәрігер диспансердің бөлімше меңгерушісімен бірлесе отырып, науқасты емдеуге жатқызу қажеттігі туралы шешім шығарады.",
-          "Дәрігер жолдаманы ресімдейді және бос төсек – орын болған жағдайда ауруханаға жатқызу кодын және науқасты емдеуге алған күнің көрсете отырып, Емдеуге жатқызу Бюросы порталында науқастың деректерін тіркейді.",
-          "Дәрігер сіздің деректеріңізді Емдеуге жатқызу Бюросы порталына кіргізгеннен кейін сіздің қолыңызға жеке коды бар жоспарлы емдеуге жатқызуға арналған талон береді. Деректер құпия болып табылады.",
-          "Өтінім порталда тіркелген кезден бастап 2 күн ішінде аурухана жоспарлы емдеуге жатқызу алдын ала күнін анықтайды.",
-          "Аурухана емдеуге жатқызу күнін анықтағаннан кейін дәрігер сізге жоспарлы түрде ауруханаларға жіберу жолдамасын береді.",
-          "Емдеуге жатқызуды күткен мерзімде сіз емхана дәрігерінің байқалуындаболасыз. Үздіксіз бақылау міндетті болып табылады.",
-          "Сіз ауруханаға жатқызу туралы жолдамадағы көрсетілген мерзімде келуге міндеттісіз. Күтпеген жағдаяттар туындаған жағдайда (басқа жіті аурулары, басқа жаққа кету, билеттің болмауы т. б.) дәрігерді уақытында хабардар ету қажет. Пациент келмеген жағдайда, өтінім күшін жояды.",
-        ],
-      },
-    },
-    {
-      type: "section",
-      title: "Ауруханаға жоспарлы емдеуге жатқызу кезінде болуы тиіс құжаттар",
-      list: [
-        "Жеке куәлігі",
-        "Барлық талдаулар мен диагностикалық зерттеулер нәтижелері",
-        "Емдеуге жатқызу талоны",
-        "Емдеуге жатқызуға арналған жолдама (мөрмен және қолмен расталады)",
-      ],
-      warning: "Бұл ауруханаға жатқызу құжаттар пакеті толық болмаған жағдайда аурухана науқасты емдеуге жатқызудан бас тартуға құқылы!!!",
-    },
-    {
-      type: "section",
-      title: "Ауруханадағы көмек көрсету тәртібі",
-      paragraphs: [
-        "Ауруханалық көмек - тәулік бойы медициналық бақылауда жасалатын білікті, мамандандырылған және жоғары мамандандырылған медициналық көмек.",
-        "Жоспарлы емдеуге жатқызу талоны – бұл Порталда жоспарлы емделуге жатқызуға тіркеліп және жолданған фактісін растайтын құжатты.",
-      ],
-    },
-    {
-      type: "note",
-      title: "Ескертпе:",
-      content: "Тегін медициналық көмектің кепілді көлемі (ТМККК) аясында қызметтер тегін көрсетілуі тиіс.",
-    },
-  ],
-}
+import { useLanguage } from "@/components/language-provider"
 
 export default function MemoPage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.patients?.memo || {}
+  
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="py-20">
         <div className="container mx-auto px-4">
           <BackButton />
           <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">
-            {memoPageContent.title}
+            {t.title}
           </h1>
 
           <div className="mx-auto max-w-4xl space-y-8">
-            {memoPageContent.sections.map((section, index) => {
-              if (section.type === "section") {
-                return (
-                  <div key={index} className="rounded-lg bg-white p-8 shadow-md">
-                    <h2 className="mb-4 text-2xl font-bold text-gray-900">
-                      {section.title}
-                    </h2>
+            {/* Section 1 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900">
+                {t.section1?.title}
+              </h2>
+              <p className="mb-4 text-sm text-gray-600">{t.section1?.subtitle}</p>
+              <div className="space-y-4 text-gray-700 mb-6">
+                <p>{t.section1?.paragraph1}</p>
+                <p>{t.section1?.paragraph2}</p>
+              </div>
+            </div>
 
-                    {section.subtitle && (
-                      <p className="mb-4 text-sm text-gray-600">{section.subtitle}</p>
-                    )}
+            {/* What Is Section */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900">
+                {t.whatIs?.title}
+              </h2>
+              <div className="space-y-4 text-gray-700 mb-6">
+                <p>{t.whatIs?.paragraph1}</p>
+              </div>
+            </div>
 
-                    {section.paragraphs && (
-                      <div className="space-y-4 text-gray-700 mb-6">
-                        {section.paragraphs.map((para, i) => (
-                          <p key={i}>{para}</p>
-                        ))}
-                      </div>
-                    )}
+            {/* Section 2 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900">
+                {t.section2?.title}
+              </h2>
+              <div className="space-y-4 text-gray-700 mb-6">
+                <p>{t.section2?.paragraph1}</p>
+                <p>{t.section2?.paragraph2}</p>
+              </div>
+              <div className="mb-6">
+                <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                  {t.section2?.subsectionTitle}
+                </h3>
+                <ol className="list-decimal space-y-3 pl-6 text-gray-700">
+                  <li>{t.section2?.listItem1}</li>
+                  <li>{t.section2?.listItem2}</li>
+                  <li>{t.section2?.listItem3}</li>
+                  <li>{t.section2?.listItem4}</li>
+                  <li>{t.section2?.listItem5}</li>
+                  <li>{t.section2?.listItem6}</li>
+                  <li>{t.section2?.listItem7}</li>
+                  <li>{t.section2?.listItem8}</li>
+                  <li>{t.section2?.listItem9}</li>
+                  <li>{t.section2?.listItem10}</li>
+                </ol>
+              </div>
+            </div>
 
-                    {section.subsection && (
-                      <div className="mb-6">
-                        <h3 className="mb-3 text-xl font-semibold text-gray-900">
-                          {section.subsection.title}
-                        </h3>
-                        <ol className="list-decimal space-y-3 pl-6 text-gray-700">
-                          {section.subsection.list.map((item, i) => (
-                            <li key={i}>{item}</li>
-                          ))}
-                        </ol>
-                      </div>
-                    )}
+            {/* Section 3 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900">
+                {t.section3?.title}
+              </h2>
+              <ul className="list-disc space-y-2 pl-6 text-gray-700 mb-6">
+                <li>{t.section3?.listItem1}</li>
+                <li>{t.section3?.listItem2}</li>
+                <li>{t.section3?.listItem3}</li>
+                <li>{t.section3?.listItem4}</li>
+              </ul>
+              <p className="font-semibold text-red-600">{t.section3?.warning}</p>
+            </div>
 
-                    {section.list && (
-                      <ul className="list-disc space-y-2 pl-6 text-gray-700 mb-6">
-                        {section.list.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
-                    )}
+            {/* Section 4 */}
+            <div className="rounded-lg bg-white p-8 shadow-md">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900">
+                {t.section4?.title}
+              </h2>
+              <div className="space-y-4 text-gray-700 mb-6">
+                <p>{t.section4?.paragraph1}</p>
+                <p>{t.section4?.paragraph2}</p>
+              </div>
+            </div>
 
-                    {section.warning && (
-                      <p className="font-semibold text-red-600">{section.warning}</p>
-                    )}
-                  </div>
-                )
-              }
+            {/* Note */}
+            <div className="rounded-lg bg-blue-50 p-6">
+              <h3 className="mb-2 text-lg font-bold text-blue-900">
+                {t.note?.title}
+              </h3>
+              <p className="text-blue-800">{t.note?.content}</p>
+            </div>
 
-              if (section.type === "note") {
-                return (
-                  <div key={index} className="rounded-lg bg-blue-50 p-6">
-                    <h3 className="mb-2 text-lg font-bold text-blue-900">
-                      {section.title}
-                    </h3>
-                    <p className="text-blue-800">{section.content}</p>
-                  </div>
-                )
-              }
-
-              return null
-            })}
             <div className="mt-8 pt-4 border-t">
-              <Link href="/patients" className="inline-block bg-red-600 text-white px-6 py-3 rounded font-semibold">← Емделушілерге қайта оралу</Link>
+              <Link href="/patients" className="inline-block bg-red-600 text-white px-6 py-3 rounded font-semibold">
+                ← {t.backToPatients}
+              </Link>
             </div>
           </div>
         </div>
@@ -152,3 +112,4 @@ export default function MemoPage() {
     </main>
   )
 }
+
