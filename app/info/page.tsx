@@ -1,20 +1,26 @@
+"use client"
+
 import { BackButton } from "@/components/back-button"
+import { useLanguage } from "@/components/language-provider"
 
 export default function InfoPage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.info || {}
+
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="py-20">
         <div className="container mx-auto px-4">
           <BackButton />
-          <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">Пайдалы ақпарат</h1>
+          <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">{t.title}</h1>
 
           <div className="mx-auto max-w-4xl space-y-8">
             <div className="rounded-lg bg-white p-8 shadow-md">
-              <h2 className="mb-6 text-3xl font-bold text-gray-900">Тері аурулары</h2>
+              <h2 className="mb-6 text-3xl font-bold text-gray-900">{t.skinDiseases}</h2>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="mb-3 text-2xl font-semibold text-blue-600">Қышыма қотыр (чесотка)</h3>
+                  <h3 className="mb-3 text-2xl font-semibold text-blue-600">{t.scabies}</h3>
                   <p className="mb-4 text-gray-700">
                     Қышыма қотыр терінің жұқпалы ауруы. Оны тарататын қоздырғыш қышыма қотыр кенесі. Ол адамның терісіне
                     жұққан бойда, өзіне орын "қаза" бастайды. Ұрғашысы сол өзі "мекендеген" тұсқа жұмыртқа салады.
@@ -23,7 +29,7 @@ export default function InfoPage() {
                 </div>
 
                 <div>
-                  <h4 className="mb-2 text-xl font-semibold text-gray-900">Қалай жұғады?</h4>
+                  <h4 className="mb-2 text-xl font-semibold text-gray-900">{t.howItSpreads}</h4>
                   <p className="text-gray-700">
                     Қышыма қотыры бар адаммен қарым-қатынас жасағанда, онымен төсек орынды, киім кешекті, орамалды
                     сүлгіні, ысқыны (мочалка) т.б. заттарды бірге пайдаланғанда жұғады. Тиісті санитарлық тәртіп
@@ -32,7 +38,7 @@ export default function InfoPage() {
                 </div>
 
                 <div>
-                  <h4 className="mb-2 text-xl font-semibold text-gray-900">Қайтіп байқалады?</h4>
+                  <h4 className="mb-2 text-xl font-semibold text-gray-900">{t.howItManifests}</h4>
                   <p className="text-gray-700">
                     Дененің кей тұсы бой бермей дуылдап кышиды, үстін түрлі түйіншектер, көпіршіктер, қанды қабыршақтар,
                     тырнақ ізі басады. Мұндай жағдай аяқ-қолдың буын бүгілістерінен де, саусақ аралықтарынан да,
@@ -41,7 +47,7 @@ export default function InfoPage() {
                 </div>
 
                 <div>
-                  <h4 className="mb-2 text-xl font-semibold text-gray-900">Не істеу керек?</h4>
+                  <h4 className="mb-2 text-xl font-semibold text-gray-900">{t.whatToDo}</h4>
                   <p className="text-gray-700">
                     Осындай белгі сезілді дегенше, уақыт оздырмай дәрігерге көріну керек. Қышыма қотырмен күресте
                     дәрігерге уақытында көріну де, дер кезінде тыңғылықты емделу де, науқастың тұтынған заттарындағы
@@ -50,7 +56,7 @@ export default function InfoPage() {
                 </div>
 
                 <div className="rounded-lg bg-blue-50 p-6">
-                  <h4 className="mb-3 text-xl font-semibold text-blue-900">Сақтану шаралары</h4>
+                  <h4 className="mb-3 text-xl font-semibold text-blue-900">{t.prevention}</h4>
                   <ul className="list-disc space-y-2 pl-6 text-blue-800">
                     <li>Қышыма қотырдан аман болудың басты жолы тазалық.</li>
                     <li>Апта сайын суға түсіп, іш киімді жетісіне бір ауыстырып түру шарт.</li>
