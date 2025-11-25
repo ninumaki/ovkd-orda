@@ -2,8 +2,12 @@
 
 import Link from "next/link"
 import { BackButton } from "@/components/back-button"
+import { useLanguage } from "@/components/language-provider"
 
 export default function HistoryPage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.history || {}
+
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="container mx-auto px-4 py-10">
@@ -13,7 +17,7 @@ export default function HistoryPage() {
               <BackButton />
             </div>
 
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">Мекеме тарихы</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">{t.title}</h1>
 
             <div className="bg-white rounded-lg p-6 shadow prose max-w-full space-y-4">
               <p className="font-semibold text-lg">
@@ -55,7 +59,7 @@ export default function HistoryPage() {
 
             <div className="mt-8 pt-4 border-t">
               <Link href="/about" className="inline-block text-blue-600 hover:text-blue-800 font-semibold">
-                ← Мекемеге оралу
+                {t.backToInstitution}
               </Link>
             </div>
           </div>
