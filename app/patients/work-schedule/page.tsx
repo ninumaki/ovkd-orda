@@ -1,8 +1,12 @@
 "use client"
 
 import { BackButton } from "@/components/back-button"
+import { useLanguage } from "@/components/language-provider"
 
 export default function WorkSchedulePage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.patients?.workSchedule || {}
+
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="container mx-auto px-4 py-10">
@@ -12,34 +16,34 @@ export default function WorkSchedulePage() {
               <BackButton />
             </div>
 
-            <h1 className="text-3xl font-bold text-gray-900 mb-6">Жұмыс кестесі</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-6">{t.title}</h1>
 
             <div className="bg-white rounded-lg p-6 shadow prose max-w-full space-y-4">
               <div>
-                <h2 className="text-2xl font-bold">Жұмыс кестесі:</h2>
+                <h2 className="text-2xl font-bold">{t.scheduleTitle}</h2>
               </div>
 
               <ul className="list-disc ml-6 text-gray-700 space-y-1">
-                <li>Дүйсенбі &nbsp;&nbsp; 8.00-17.00</li>
-                <li>Сейсенбі &nbsp;&nbsp; 8.00-17.00</li>
-                <li>Сәрсенбі &nbsp;&nbsp; 8.00-17.00</li>
-                <li>Бейсенбі &nbsp;&nbsp; 8.00-17.00</li>
-                <li>Жұма &nbsp;&nbsp; 8.00-17.00</li>
+                <li>{t.monday} &nbsp;&nbsp; {t.timeRange}</li>
+                <li>{t.tuesday} &nbsp;&nbsp; {t.timeRange}</li>
+                <li>{t.wednesday} &nbsp;&nbsp; {t.timeRange}</li>
+                <li>{t.thursday} &nbsp;&nbsp; {t.timeRange}</li>
+                <li>{t.friday} &nbsp;&nbsp; {t.timeRange}</li>
               </ul>
 
-              <p className="text-sm text-gray-600">Түскі үзіліс 13.00-14.00</p>
+              <p className="text-sm text-gray-600">{t.lunchBreak}</p>
 
               <div>
-                <h3 className="font-bold">Дәрігерге қаралу үшін керек құжаттар:</h3>
+                <h3 className="font-bold">{t.documentsTitle}</h3>
                 <ul className="list-disc ml-6 text-gray-700 space-y-1 mt-2">
-                  <li>Жеке куәлік, Туу туралы куәлік</li>
-                  <li>Жолдама</li>
+                  <li>{t.document1}</li>
+                  <li>{t.document2}</li>
                 </ul>
               </div>
 
               <div className="mt-6">
                 <a href="/patients" className="inline-block bg-red-600 text-white px-6 py-3 rounded font-semibold">
-                  ← Емделушілерге қайта оралу
+                  ← {t.backToPatients}
                 </a>
               </div>
             </div>
