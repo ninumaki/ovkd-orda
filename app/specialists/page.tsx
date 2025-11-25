@@ -2,41 +2,40 @@
 
 import { BackButton } from "@/components/back-button"
 import Link from "next/link"
-import { useState } from "react";
+import { useState } from "react"
+import { useLanguage } from "@/components/language-provider"
 
 export default function SpecialistsPage() {
-  const [activeSection, setActiveSection] = useState("none");
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.specialists || {}
+  const [activeSection, setActiveSection] = useState("none")
 
   const handleSectionChange = (section: "nurses" | "doctors" | "none") => {
-    setActiveSection(section);
-  };
+    setActiveSection(section)
+  }
 
   const sections = [
     {
-      title: "Статьялар",
-      titleKz: "Мамандарға арналған мәліметтер",
-      description: "Миндетті медициналық сақтандыру (МӘМС) туралы маңызды ақпарат және құқықтар",
+      title: t.articles,
+      description: t.articlesDesc,
       href: "/specialists/articles",
       icon: "📄"
     },
     {
-      title: "Заннамалық база",
-      titleKz: "Заттау құжаттар",
-      description: "Қазақстанның дерматовенерологиялық ойлау стандарттары және заңдарын оқы",
+      title: t.legal,
+      description: t.legalDesc,
       href: "/specialists/legal",
       icon: "⚖️"
     },
     {
-      title: "Пайдалы ақпарат",
-      titleKz: "Кәсіби даму материалдары",
-      description: "Мамандарға арналған пайдалы материал және кәсіби ресурстар",
+      title: t.info,
+      description: t.infoDesc,
       href: "/specialists/info",
       icon: "📚"
     },
     {
-      title: "МӘМС туралы толық ақпарат",
-      titleKz: "Медициналық сақтандыру жүйесі",
-      description: "Миндетті медициналық сақтандыру жүйесінің барлық деталі",
+      title: t.more,
+      description: t.moreDesc,
       href: "/specialists/more",
       icon: "💼"
     }
@@ -51,9 +50,9 @@ export default function SpecialistsPage() {
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">Біздің қызметкерлер</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">{t.title}</h1>
             <p className="text-lg text-gray-600">
-              Орта және кіші буын медицина қызметкерлері мен дәрігерлер жайлы ақпарат.
+              {t.description}
             </p>
           </div>
 
@@ -64,7 +63,7 @@ export default function SpecialistsPage() {
                 activeSection === "nurses" ? "bg-blue-600" : "bg-gray-400"
               } hover:bg-blue-700 transition-colors`}
             >
-              Орта және кіші буын медицина қызметкерлері
+              {t.nursesButton}
             </button>
             <button
               onClick={() => handleSectionChange("doctors")}
@@ -72,14 +71,14 @@ export default function SpecialistsPage() {
                 activeSection === "doctors" ? "bg-blue-600" : "bg-gray-400"
               } hover:bg-blue-700 transition-colors`}
             >
-              Дәрігерлер жайлы мәлімет
+              {t.doctorsButton}
             </button>
           </div>
 
           {activeSection === "nurses" && (
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Орта және кіші буын медицина қызметкерлері
+                {t.nurses}
               </h2>
               <p className="text-gray-700 mb-4">
                 Облыстық тері - венерология диспансерінде 41 орта буын және 18 кіші буын медицина қызметкері жұмыс істейді. Оның ішінде 61 пайызы жоғары, 19,7 пайызы бірінші, 2,4 пайызы екінші санатты мамандар.
@@ -96,25 +95,24 @@ export default function SpecialistsPage() {
           {activeSection === "doctors" && (
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Дәрігерлер жайлы мәлімет
+                {t.doctors}
               </h2>
               <p className="text-gray-700">
-                Контент қосылады.
+                {t.contentComing}
               </p>
             </div>
           )}
 
           <div className="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">⚖️ Заннамалық база</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-3">{t.legalBase}</h3>
             <p className="text-gray-700 mb-4">
-              Республика Казахстан Министерствосы денсаулық сақтау және әлеуметтік даму ресімі 
-              2015 жылдың 23 қазанының №821 приказы негіздемесінде дерматовенерологиялық көмек ұйымдастыруы туралы стандарт.
+              {t.legalDescription}
             </p>
             <Link 
               href="/specialists/legal"
               className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
-              Толық қараңыз →
+              {t.viewFull}
             </Link>
           </div>
         </div>
