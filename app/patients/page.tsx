@@ -1,3 +1,289 @@
+"use client"
+
+import Link from "next/link"
+import { BackButton } from "@/components/back-button"
+import { useLanguage } from "@/components/language-provider"
+
+type PatientsSection = {
+  type: string
+  title?: string
+  subtitle?: string
+  description?: string
+  link?: string
+  fileName?: string
+  fileSize?: string
+  filePath?: string
+  paragraphs?: string[]
+  list?: string[]
+  warning?: string
+  subsection?: {
+    title?: string
+    list?: string[]
+  }
+  content?: string
+}
+
+export default function PatientsPage() {
+  const { translations } = useLanguage()
+  const t = translations.pages?.patientsPage
+  const sections = (t?.sections || []) as PatientsSection[]
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <BackButton />
+          <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">{t?.title}</h1>
+
+          <div className="mx-auto max-w-4xl space-y-8">
+            {sections.map((section, index) => {
+              if (section.type === "memoLink") {
+                return (
+                  <Link key={index} href={section.link || "#"}>
+                    <div className="rounded-lg bg-blue-50 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer border-2 border-blue-300">
+                      <h2 className="text-xl font-semibold text-blue-700 text-center">{section.title}</h2>
+                      <p className="text-sm text-blue-600 text-center mt-2">{section.description}</p>
+                    </div>
+                  </Link>
+                )
+              }
+
+              if (section.type === "download") {
+                return (
+                  <div key={index} className="rounded-lg bg-white p-8 shadow-md">
+                    <h2 className="mb-4 text-2xl font-bold text-gray-900 text-center">{section.title}</h2>
+                    <p className="text-center text-lg text-gray-700 mb-6">{section.description}</p>
+
+                    <div className="text-center">
+                      <a
+                        href={section.filePath}
+                        download={section.fileName}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors"
+                      >
+                        {section.fileName}
+                        {section.fileSize && <span className="text-sm ml-2">[{section.fileSize}]</span>}
+                      </a>
+                    </div>
+                  </div>
+                )
+              }
+
+              if (section.type === "pricesLink") {
+                return (
+                  <Link key={index} href={section.link || "#"}>
+                    <div className="rounded-lg bg-red-50 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer border-2 border-red-300">
+                      <h2 className="text-xl font-semibold text-red-700 text-center">{section.title}</h2>
+                      <p className="text-sm text-red-600 text-center mt-2">{section.description}</p>
+                    </div>
+                  </Link>
+                )
+              }
+
+              if (section.type === "section") {
+                return (
+                  <div key={index} className="rounded-lg bg-white p-8 shadow-md">
+                    <h2 className="mb-4 text-2xl font-bold text-gray-900">{section.title}</h2>
+
+                    {section.subtitle && (
+                      <p className="mb-4 text-sm text-gray-600">{section.subtitle}</p>
+                    )}
+
+                    {section.paragraphs && (
+                      <div className="space-y-4 text-gray-700 mb-6">
+                        {section.paragraphs.map((para, i) => (
+                          <p key={i}>{para}</p>
+                        ))}
+                      </div>
+                    )}
+
+                    {section.subsection && (
+                      <div className="mb-6">
+                        <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                          {section.subsection.title}
+                        </h3>
+                        <ol className="list-decimal space-y-3 pl-6 text-gray-700">
+                          {section.subsection.list?.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    )}
+
+                    {section.list && (
+                      <ul className="list-disc space-y-2 pl-6 text-gray-700 mb-6">
+                        {section.list.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {section.warning && (
+                      <p className="font-semibold text-red-600">{section.warning}</p>
+                    )}
+                  </div>
+                )
+              }
+
+              if (section.type === "note") {
+                return (
+                  <div key={index} className="rounded-lg bg-blue-50 p-6">
+                    <h3 className="mb-2 text-lg font-bold text-blue-900">{section.title}</h3>
+                    <p className="text-blue-800">{section.content}</p>
+                  </div>
+                )
+              }
+
+              return null
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+"use client"
+
+import Link from "next/link"
+import { BackButton } from "@/components/back-button"
+import { useLanguage } from "@/components/language-provider"
+
+type PatientsSection = {
+  type: string
+  title?: string
+  subtitle?: string
+  description?: string
+  link?: string
+  fileName?: string
+  fileSize?: string
+  filePath?: string
+  paragraphs?: string[]
+  list?: string[]
+  warning?: string
+  subsection?: {
+    title?: string
+    list?: string[]
+  }
+  content?: string
+}
+
+export default function PatientsPage() {
+  const { translations } = useLanguage()
+  const t = translations.pages?.patientsPage
+  const sections = (t?.sections || []) as PatientsSection[]
+
+  return (
+    <main className="min-h-screen bg-gray-50">
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <BackButton />
+          <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">{t?.title}</h1>
+
+          <div className="mx-auto max-w-4xl space-y-8">
+            {sections.map((section, index) => {
+              if (section.type === "memoLink") {
+                return (
+                  <Link key={index} href={section.link || "#"}>
+                    <div className="rounded-lg bg-blue-50 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer border-2 border-blue-300">
+                      <h2 className="text-xl font-semibold text-blue-700 text-center">{section.title}</h2>
+                      <p className="text-sm text-blue-600 text-center mt-2">{section.description}</p>
+                    </div>
+                  </Link>
+                )
+              }
+
+              if (section.type === "download") {
+                return (
+                  <div key={index} className="rounded-lg bg-white p-8 shadow-md">
+                    <h2 className="mb-4 text-2xl font-bold text-gray-900 text-center">{section.title}</h2>
+                    <p className="text-center text-lg text-gray-700 mb-6">{section.description}</p>
+
+                    <div className="text-center">
+                      <a
+                        href={section.filePath}
+                        download={section.fileName}
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors"
+                      >
+                        {section.fileName}
+                        {section.fileSize && <span className="text-sm ml-2">[{section.fileSize}]</span>}
+                      </a>
+                    </div>
+                  </div>
+                )
+              }
+
+              if (section.type === "pricesLink") {
+                return (
+                  <Link key={index} href={section.link || "#"}>
+                    <div className="rounded-lg bg-red-50 p-6 shadow-md hover:shadow-lg transition-shadow cursor-pointer border-2 border-red-300">
+                      <h2 className="text-xl font-semibold text-red-700 text-center">{section.title}</h2>
+                      <p className="text-sm text-red-600 text-center mt-2">{section.description}</p>
+                    </div>
+                  </Link>
+                )
+              }
+
+              if (section.type === "section") {
+                return (
+                  <div key={index} className="rounded-lg bg-white p-8 shadow-md">
+                    <h2 className="mb-4 text-2xl font-bold text-gray-900">{section.title}</h2>
+
+                    {section.subtitle && (
+                      <p className="mb-4 text-sm text-gray-600">{section.subtitle}</p>
+                    )}
+
+                    {section.paragraphs && (
+                      <div className="space-y-4 text-gray-700 mb-6">
+                        {section.paragraphs.map((para, i) => (
+                          <p key={i}>{para}</p>
+                        ))}
+                      </div>
+                    )}
+
+                    {section.subsection && (
+                      <div className="mb-6">
+                        <h3 className="mb-3 text-xl font-semibold text-gray-900">
+                          {section.subsection.title}
+                        </h3>
+                        <ol className="list-decimal space-y-3 pl-6 text-gray-700">
+                          {section.subsection.list?.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ol>
+                      </div>
+                    )}
+
+                    {section.list && (
+                      <ul className="list-disc space-y-2 pl-6 text-gray-700 mb-6">
+                        {section.list.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {section.warning && (
+                      <p className="font-semibold text-red-600">{section.warning}</p>
+                    )}
+                  </div>
+                )
+              }
+
+              if (section.type === "note") {
+                return (
+                  <div key={index} className="rounded-lg bg-blue-50 p-6">
+                    <h3 className="mb-2 text-lg font-bold text-blue-900">{section.title}</h3>
+                    <p className="text-blue-800">{section.content}</p>
+                  </div>
+                )
+              }
+
+              return null
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
 import { BackButton } from "@/components/back-button"
 import Link from "next/link"
 
