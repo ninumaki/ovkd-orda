@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { BackButton } from "@/components/back-button"
+import { useLanguage } from "@/components/language-provider"
 
 type FormState = {
   name: string
@@ -11,6 +12,8 @@ type FormState = {
 }
 
 export default function ContactPage() {
+  const { translations, language } = useLanguage()
+  const t = translations.pages?.contact || {}
   const [form, setForm] = useState<FormState>({ name: "", email: "", subject: "", message: "" })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -26,7 +29,7 @@ export default function ContactPage() {
     setSuccess(null)
 
     if (!form.name.trim() || !form.email.trim() || !form.subject.trim() || !form.message.trim()) {
-      setError("Барлық өрістерді толтырыңыз")
+      setError(t.errorAllFields || "Барлық өрістерді толтырыңыз")
       return
     }
 
@@ -40,13 +43,13 @@ export default function ContactPage() {
 
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))
-        throw new Error(body?.message || "Жіберу кезінде қате орын алды")
+        throw new Error(body?.message || t.errorSubmit || "Жіберу кезінде қате орын алды")
       }
 
-      setSuccess("Хат сәтті жіберілді. Сізге жақын арада жауап беріледі.")
+      setSuccess(t.success || "Хат сәтті жіберілді. Сізге жақын арада жауап беріледі.")
       setForm({ name: "", email: "", subject: "", message: "" })
     } catch (err: any) {
-      setError(err?.message || "Жіберу мүмкін болмады")
+      setError(err?.message || t.errorGeneric || "Жіберу мүмкін болмады")
     } finally {
       setLoading(false)
     }
@@ -83,14 +86,14 @@ export default function ContactPage() {
               </h2>
 
               <p className="text-sm text-gray-700 mb-4">
-                Мекен-жайымыз: Қызылорда қаласы, Зейнолла Шүкіров көшесі №7А
+                {t.address}
               </p>
 
               <div className="mb-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Аты-жөні*</label>
+                      <label className="block text-sm font-medium text-gray-700">{t.nameLabel}</label>
                       <input
                         value={form.name}
                         onChange={(e) => update("name", e.target.value)}
@@ -100,7 +103,7 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">E-Mail*</label>
+                      <label className="block text-sm font-medium text-gray-700">{t.emailLabel}</label>
                       <input
                         type="email"
                         value={form.email}
@@ -112,7 +115,7 @@ export default function ContactPage() {
                     </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Тақырып*</label>
+                    <label className="block text-sm font-medium text-gray-700">{t.subjectLabel}</label>
                     <input
                       value={form.subject}
                       onChange={(e) => update("subject", e.target.value)}
@@ -122,7 +125,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Хабарлама*</label>
+                    <label className="block text-sm font-medium text-gray-700">{t.messageLabel}</label>
                     <textarea
                       value={form.message}
                       onChange={(e) => update("message", e.target.value)}
@@ -141,25 +144,25 @@ export default function ContactPage() {
                       disabled={loading}
                       className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-60"
                     >
-                      {loading ? "Жіберілуде..." : "Хат жіберу"}
+                      {loading ? t.submitLoading : t.submitButton}
                     </button>
                     <button
                       type="button"
                       onClick={() => setForm({ name: "", email: "", subject: "", message: "" })}
                       className="px-3 py-2 border rounded"
                     >
-                      Тазарту
+                      {t.clearButton}
                     </button>
                   </div>
                 </form>
               </div>
 
               <div className="text-sm text-gray-800 space-y-1">
-                <p><span className="font-semibold">Call-центр:</span> +7(724)240-00-01</p>
-                <p><span className="font-semibold">Регистратура:</span> +7(724)223-54-72</p>
-                <p><span className="font-semibold">Приемная:</span> +7(724)223-55-17</p>
-                <p><span className="font-semibold">Телефон доверия:</span> +7(724)223-55-48</p>
-                <p><span className="font-semibold">Кожное отделение:</span> +7(724)223-52-68</p>
+                <p><span className="font-semibold">{t.callCenter}</span> +7(724)240-00-01</p>
+                <p><span className="font-semibold">{t.registry}</span> +7(724)223-54-72</p>
+                <p><span className="font-semibold">{t.reception}</span> +7(724)223-55-17</p>
+                <p><span className="font-semibold">{t.hotline}</span> +7(724)223-55-48</p>
+                <p><span className="font-semibold">{t.dermatology}</span> +7(724)223-52-68</p>
               </div>
             </div>
           </div>
